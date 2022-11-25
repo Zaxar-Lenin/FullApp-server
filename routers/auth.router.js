@@ -4,6 +4,7 @@ const router = new Router
 const config = require('config')
 const jwt = require('jsonwebtoken')
 const authMiddleware = require('../middleware/auth.middleware')
+require('dotenv').config();
 const {check,validationResult} =require('express-validator')
 const bcrypt = require("bcryptjs")
 
@@ -76,7 +77,7 @@ router.post("/login",
 
         await newUser.save()
 
-        const token = jwt.sign({id: user.id}, config.get("server-key"),{expiresIn: "1h"})
+        const token = jwt.sign({id: user.id}, process.env.SEKRET_KEY,{expiresIn: "1h"})
 
         return res.json({
             token,
@@ -102,7 +103,7 @@ router.get("/auth",
           res.status(404).json({message: "Не авторизован"})
           }
 
-          const token = jwt.sign({id: user.id}, config.get("server-key"),{expiresIn: "1h"})
+          const token = jwt.sign({id: user.id}, process.env.SEKRET_KEY,{expiresIn: "1h"})
 
           return res.json({
                     token,

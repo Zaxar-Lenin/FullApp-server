@@ -4,7 +4,9 @@ const config = require('config')
 const cors = require('cors')
 const userRouter = require('./routers/auth.router')
 const corsMiddleware = require("./middleware/cors.middleware")
+require('dotenv').config();
 const app = express()
+
 
 const corsOptions ={
     origin:['http://localhost:3000','https://zaxar-lenin.github.io'],
@@ -17,11 +19,11 @@ app.use(cors(corsOptions))
 app.use(express.json())
 app.use("/api/auth", userRouter)
 
-const port = config.get("serverPort") || 5000
+const port = process.env.PORT || 5000
 
 const start = async () => {
     try{
-        await mongoose.connect(config.get('dbUrl'))
+        await mongoose.connect(process.env.DB_URL)
 
         app.listen(port, () => {
             console.log(`Server listening on port ${port}`)
