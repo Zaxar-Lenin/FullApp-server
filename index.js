@@ -9,7 +9,7 @@ const app = express()
 
 
 const corsOptions ={
-    origin:['http://localhost:3000','https://zaxar-lenin.github.io/FullApp-frontEnd'],
+    origin:['https://zaxar-lenin.github.io/FullApp-frontEnd'],
     credentials:true,
     optionSuccessStatus:200,
     methods: ['GET','PUT','POST','DELETE'],
