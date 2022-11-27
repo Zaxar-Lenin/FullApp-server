@@ -8,14 +8,14 @@ require('dotenv').config();
 const app = express()
 
 
-const corsOptions ={
-    origin:['https://zaxar-lenin.github.io'],
-    credentials:true,
-    optionSuccessStatus:200,
-    methods: ['GET','PUT','POST','DELETE'],
-}
+// const corsOptions ={
+//     origin:['https://zaxar-lenin.github.io'],
+//     credentials:true,
+//     optionSuccessStatus:200,
+//     methods: ['GET','PUT','POST','DELETE'],
+// }
 
-app.use(cors(corsOptions))
+app.use(cors())
 app.use(express.json())
 app.use("/api/auth", userRouter)
 
