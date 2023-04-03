@@ -6,6 +6,8 @@ const userRouter = require('./routers/auth.router')
 const corsMiddleware = require("./middleware/cors.middleware")
 require('dotenv').config();
 const app = express()
+const bodyParser = require("body-parser");
+const crowdsecMiddleware = require("./middleware/crowdsec.middleware")
 
 
 // const corsOptions ={
@@ -15,7 +17,15 @@ const app = express()
 //     methods: ['GET','PUT','POST','DELETE'],
 // }
 
+//  const crowdsecMiddleware = await expressCrowdsecBouncer({
+//     url: "http://localhost:8080",
+//     apiKey: "BOUNCER_API_KEY",
+//   });
+
+
 app.use(cors())
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(crowdsecMiddleware);
 app.use(express.json())
 app.use("/api/auth", userRouter)
 
